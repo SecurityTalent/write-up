@@ -1045,7 +1045,7 @@ Below is a comprehensive, production-ready Prototype Pollution scanner optimized
 ```python
 #!/usr/bin/env python3
 """
-HackerAI Prototype Pollution Scanner v2.0
+SecurityTalent Prototype Pollution Scanner v2.0
 Comprehensive scanner for bug bounty and pentest engagements.
 Supports: POST/GET/PUT/PATCH, JSON/URL-encoded bodies, all payload variants.
 """
@@ -1065,7 +1065,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 BANNER = """
 ╔════════════════════════════════════════════════════╗
-║     HackerAI Prototype Pollution Scanner v2.0     ║
+║     SecurityTalent Prototype Pollution Scanner v2.0     ║
 ║     Bug Bounty Edition — Full Auto Recon          ║
 ╚════════════════════════════════════════════════════╝
 """
@@ -1177,7 +1177,7 @@ class PrototypePollutionScanner:
             self.session.headers.update(headers)
         else:
             self.session.headers.update({
-                "User-Agent": "HackerAI-PP-Scanner/2.0",
+                "User-Agent": "SecurityTalent-PP-Scanner/2.0",
                 "Accept": "*/*",
                 "Content-Type": "application/json",
             })
@@ -1588,7 +1588,7 @@ class PrototypePollutionScanner:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="HackerAI Prototype Pollution Scanner — Bug Bounty Edition",
+        description="SecurityTalent Prototype Pollution Scanner — Bug Bounty Edition",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
