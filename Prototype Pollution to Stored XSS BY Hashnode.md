@@ -46,7 +46,11 @@ const payload = JSON.parse('{"__proto__":{"srcdoc":"<img src=x onerror=alert(12)
 
 ---
 
+
+## POC
 ![Hashnode POC](POC/Hashnode.gif)
+
+
 
 ## Step-by-Step Bug Discovery via Console
 
