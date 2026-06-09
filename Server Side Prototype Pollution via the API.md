@@ -4,7 +4,7 @@
 
 ---
 
-### Table of Contents
+### Table of Contents 
 
 1. [Background & Motivation](#background)
 2. [Understanding the Attack Surface](#surface)
@@ -20,7 +20,7 @@
 ---
 
 <a name="background"></a>
-## 1. Background & Motivation
+## 1. Background & Motivations
 
 Hashnode is a popular blogging platform built on Next.js. While exploring its API surface during a routine security assessment, I noticed something interesting: the **draft management API** accepts JSON payloads via `PUT /api/drafts/{id}`, and the server responds with full draft objects. This raised a critical question — **does the server perform unsafe recursive merges on incoming JSON?**
 
