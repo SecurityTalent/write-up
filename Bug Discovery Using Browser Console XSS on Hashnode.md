@@ -107,7 +107,7 @@ document.body.innerHTML += '<img src=x onerror="alert(\'Direct DOM XSS Works!\')
 
 ---
 
-## POC
+## POC VIdeo
 
 <a href="https://youtu.be/Fb-146Bse84" target="_blank">
   <img src="POC/POC_01.png" alt="POC Thumbnail" width="800"/>
