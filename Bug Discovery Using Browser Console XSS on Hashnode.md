@@ -107,13 +107,11 @@ document.body.innerHTML += '<img src=x onerror="alert(\'Direct DOM XSS Works!\')
 
 ---
 
-
 ## POC
 
-<video controls width="800">
-  <source src="./POC/hashnode-poc.mp4" type="video/mp4">
-</video>
-
+<a href="https://youtu.be/Fb-146Bse84" target="_blank">
+  <img src="POC/POC_01.png" alt="POC Thumbnail" width="800"/>
+</a>
 
 ## Step 3: The Gadget Problem — Explained
 
