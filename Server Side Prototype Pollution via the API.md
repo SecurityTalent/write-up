@@ -465,7 +465,6 @@ fetch('https://hashnode.com/api/drafts/6a26b23b5557747c5c330fbc', {
 ```
 
 ## POC:
-## POC
 
 <a target="_blank">
   <img src="POC/temp_01.png" alt="POC Thumbnail" width="800"/>
