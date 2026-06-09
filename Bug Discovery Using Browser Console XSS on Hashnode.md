@@ -510,6 +510,14 @@ Prototype Pollution to Stored XSS is a critical vulnerability chain because:
 
 ---
 
+## References
+
+- [Prototype Pollution — PortSwigger Research](https://portswigger.net/web-security/prototype-pollution)
+- [OWASP Prototype Pollution Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html)
+- [MDN: Object.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype)
+
+---
+
 ## About the Author
 
 **MD Mehedi Hasan (SecurityTalent)**  
@@ -518,35 +526,3 @@ Bug bounty hunter and security researcher specializing in prototype pollution, X
 Tags: `#prototype-pollution` `#xss` `#dom-xss` `#bug-bounty` `#security` `#javascript` `#hashnode`
 
 
-
-
-https://hashnode.com/api/drafts/6a26b23b5557747c5c330fbc
-
-Responce: {
-"success": true,
-"draft": {
-"_id": "6a26b23b5557747c5c330fbc",
-"type": "story",
-"title": "",
-"dateAdded": 1780920891088,
-"isActive": true,
-"publication": "64f4ce5fb2147985ab4ee2dd",
-"partOfPublication": true,
-"contentMarkdown": "const payload = JSON.parse('{\"**proto**\":{\"innerHTML\":\"\n\n![](x align=\"center\")\n\n\"}}');",
-"dateUpdated": 1780940722120
-},
-"publicationInfo": {
-"isTeam": true,
-"userRole": "owner",
-"memberCount": 1,
-"hasCoReviewers": false
-},
-"draftAuthorId": "64f4ce2d95596c52659933d0",
-"draftAuthorData": {
-"_id": "64f4ce2d95596c52659933d0",
-"name": "Md Mehedi Hasan",
-"username": "securitytalent",
-"avatar": "https://cdn.hashnode.com/uploads/avatars/64f4ce2d95596c52659933d0/94cd1333-f88c-407f-bb2a-3efc30d4214c.jpg",
-"role": "AUTHOR"
-}
-}
